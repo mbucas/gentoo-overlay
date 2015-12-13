@@ -4,30 +4,37 @@
 
 EAPI="4"
 
-WX_GTK_VER="2.9"
+WX_GTK_VER="3.0"
 inherit wxwidgets
 
 DESCRIPTION="FreeFileSync is a folder comparison and synchronization tool"
-HOMEPAGE="http://sf.net/projects/freefilesync"
-SRC_URI="mirror://sourceforge/project/${PN}/${PN}/${PV}/FreeFileSync_${PV}_Source.zip"
+HOMEPAGE="https://www.freefilesync.org/ http://sourceforge.net/projects/freefilesync/"
+SRC_URI="http://download1617.mediafire.com/qn0c4196eieg/uuflxhu7st0nunf/FreeFileSync_7.7_Source.zip"
 LICENSE="GPL-3"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="app-arch/unzip >=sys-devel/gcc-4.7 x11-libs/wxGTK:2.9[X] dev-libs/zenxml"
-RDEPEND=">=x11-libs/wxGTK-2.9.5[X] dev-libs/boost"
+DEPEND="app-arch/unzip
+	x11-libs/wxGTK:3.0[X]
+	>=dev-libs/zenxml-2.3"
+
+RDEPEND="x11-libs/wxGTK[X]
+	dev-libs/boost"
 
 S=${WORKDIR}
 
 src_compile(){
     cd FreeFileSync/Source
-    sed -i "s_-I../.._-I.. -I../.._" Makefile
-    emake BUILD=Launchpad || die "emake failed for FreeFileSync"
+    sed -i 's/-lboost_system/-lboost_system -lboost_chrono -lrt/' Makefile
+    sed -i 's|CPP_LIST+=ui/check_version.cpp|CPP_LIST+=ui/version_check.cpp|' Makefile
+    sed -i 's|-std=c++11|-std=c++14|' Makefile
+    emake launchpad || die "emake failed for FreeFileSync"
     cd RealtimeSync
-    sed -i "s_-I../../.._-I../.. -I../../.._" Makefile
-    emake BUILD=Launchpad || die "emake failed for RealtimeSync"
+    sed -i 's/-lboost_system/-lboost_system -lboost_chrono -lrt/' Makefile
+    sed -i 's|-std=c++11|-std=c++14|' Makefile
+    emake launchpad || die "emake failed for RealtimeSync"
 }
 
 src_install(){
