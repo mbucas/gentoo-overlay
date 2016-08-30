@@ -7,9 +7,9 @@ inherit eutils toolchain-funcs
 
 MY_P="zenXml" 
 
-DESCRIPTION="Zen XML header c++ library" 
-HOMEPAGE="" 
-SRC_URI="mirror://sourceforge/project/${PN}/${MY_P}_${PV}.zip" 
+DESCRIPTION="Zen XML header C++ library" 
+HOMEPAGE="http://zenxml.sourceforge.net/ https://sourceforge.net/projects/zenxml/" 
+SRC_URI="mirror://sourceforge/project/zenxml/${MY_P}_${PV}.zip" 
 
 LICENSE="GPL" 
 SLOT="0" 
