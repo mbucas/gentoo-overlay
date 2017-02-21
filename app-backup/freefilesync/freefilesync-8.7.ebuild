@@ -5,11 +5,11 @@
 EAPI="4"
 
 WX_GTK_VER="3.1"
-inherit wxwidgets
+inherit eutils wxwidgets
 
 DESCRIPTION="FreeFileSync is a folder comparison and synchronization tool"
 HOMEPAGE="https://www.freefilesync.org/ http://sourceforge.net/projects/freefilesync/"
-SRC_URI="http://download1149.mediafire.com/u38p9spweztg/rjdqgflzi5etz5d/FreeFileSync_8.6_Source.zip http://www.freefilesync.org/download/FreeFileSync_${PV}_Source.zip"
+SRC_URI="http://www.freefilesync.org/download/FreeFileSync_${PV}_Source.zip"
 RESTRICT="primaryuri"
 LICENSE="GPL-3"
 
@@ -19,19 +19,26 @@ IUSE=""
 
 DEPEND="app-arch/unzip
 	>=x11-libs/wxGTK-3.1[X]
-	>=dev-libs/zenxml-2.3"
+	>=dev-libs/zenxml-2.4"
 
 RDEPEND="x11-libs/wxGTK[X]
 	dev-libs/boost"
 
 S=${WORKDIR}
 
+src_prepare(){
+    cd "${S}"
+    epatch "${FILESDIR}"/freefilesync-8.7-fix-includes.patch
+}
+
 src_compile(){
     cd FreeFileSync/Source
     sed -i 's|gtk+-2.0|gtk+-3.0|' Makefile
+    sed -i 's|-O3|-O3 -D"warn_static(arg)= "|' Makefile
     emake launchpad || die "emake failed for FreeFileSync"
     cd RealTimeSync
     sed -i 's|gtk+-2.0|gtk+-3.0|' Makefile
+    sed -i 's|-O3|-O3 -D"warn_static(arg)= "|' Makefile
     emake launchpad || die "emake failed for RealTimeSync"
 }
 
