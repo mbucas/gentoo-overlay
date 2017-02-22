@@ -1,0 +1,33 @@
+diff -urN a/FreeFileSync/Source/ui/small_dlgs.cpp b/FreeFileSync/Source/ui/small_dlgs.cpp
+--- a/FreeFileSync/Source/ui/small_dlgs.cpp	2017-01-21 23:01:00.000000000 +0100
++++ b/FreeFileSync/Source/ui/small_dlgs.cpp	2017-02-22 19:47:23.240736902 +0100
+@@ -24,7 +24,6 @@
+ #include "gui_generated.h"
+ #include "custom_grid.h"
+ #include "folder_selector.h"
+-#include "version_check.h"
+ #include "../algorithm.h"
+ #include "../synchronization.h"
+ #include "../lib/help_provider.h"
+diff -urN a/FreeFileSync/Source/ui/version_check.cpp b/FreeFileSync/Source/ui/version_check.cpp
+--- a/FreeFileSync/Source/ui/version_check.cpp	2017-01-21 23:01:00.000000000 +0100
++++ b/FreeFileSync/Source/ui/version_check.cpp	2017-02-22 19:48:09.351736793 +0100
+@@ -18,6 +18,7 @@
+ #include <wx+/image_resources.h>
+ #include "../lib/ffs_paths.h"
+ #include "small_dlgs.h"
++#include "version_check_impl.h"
+ 
+ 
+ using namespace zen;
+diff -urN a/FreeFileSync/Source/ui/version_check.h b/FreeFileSync/Source/ui/version_check.h
+--- a/FreeFileSync/Source/ui/version_check.h	2017-01-21 23:01:00.000000000 +0100
++++ b/FreeFileSync/Source/ui/version_check.h	2017-02-22 19:48:28.543736747 +0100
+@@ -10,7 +10,6 @@
+ #include <functional>
+ #include <memory>
+ #include <wx/window.h>
+-#include "version_check_impl.h"
+ 
+ namespace zen
+ {
