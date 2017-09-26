@@ -10,7 +10,7 @@ inherit eutils wxwidgets
 DESCRIPTION="FreeFileSync is a folder comparison and synchronization tool"
 HOMEPAGE="https://www.freefilesync.org/ http://sourceforge.net/projects/freefilesync/"
 SRC_URI="
-    http://download7.mediafireuserdownload.com/wkwk7gcqvkgg/4xi4p32hc54ick8/FreeFileSync_9.2_Source.zip
+    http://download1486.mediafireuserdownload.com/1wn1z5ijtvzg/ahhvf858a2y7s8k/FreeFileSync_9.3_Source.zip
     http://www.freefilesync.org/download/FreeFileSync_${PV}_Source.zip
 "
 RESTRICT="primaryuri"
