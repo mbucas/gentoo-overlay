@@ -10,8 +10,11 @@ inherit eutils wxwidgets
 DESCRIPTION="FreeFileSync is a folder comparison and synchronization tool"
 HOMEPAGE="https://www.freefilesync.org/ http://sourceforge.net/projects/freefilesync/"
 
+# Now uses xBRZ, from the same author
+# https://sourceforge.net/projects/xbrz/
+# The Zip doesn't contain a Makefile, so I just included it here
 SRC_URI="
-    http://download2267.mediafire.com/4dhs6s0jar7g/udb46ckz6eruk80/FreeFileSync_10.0_Source.zip
+    https://download1654.mediafire.com/h6a55cx4f5ag/qcifc38uk365cxe/FreeFileSync_10.1_Source.zip
     http://www.freefilesync.org/download/FreeFileSync_${PV}_Source.zip
 "
 RESTRICT="mirror"
@@ -39,15 +42,15 @@ src_prepare(){
 src_compile(){
     cd FreeFileSync/Source
     sed -i 's|gtk+-2.0|gtk+-3.0|' Makefile
-    sed -i 's|-I../../boost ||' Makefile
-    sed -i 's|-pipe|-pipe -O3 -DZEN_LINUX|' Makefile
+    sed -i 's|-isystem../../boost ||' Makefile
+    sed -i 's|-pipe|-pipe -DZEN_LINUX|' Makefile
     sed -i 's|-no-pie|-no-pie -lz|' Makefile
     sed -i 's|../Build/Changelog.txt|../../Changelog.txt|' Makefile
     emake || die "emake failed for FreeFileSync"
     cd RealTimeSync
     sed -i 's|gtk+-2.0|gtk+-3.0|' Makefile
-    sed -i 's|-I../../boost ||' Makefile
-    sed -i 's|-pipe|-pipe -O3 -DZEN_LINUX|' Makefile
+    sed -i 's|-isystem../../boost ||' Makefile
+    sed -i 's|-pipe|-pipe -DZEN_LINUX|' Makefile
     sed -i 's|-no-pie|-no-pie -lz|' Makefile
     emake || die "emake failed for RealTimeSync"
 }
