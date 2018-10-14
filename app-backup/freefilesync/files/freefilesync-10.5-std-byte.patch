@@ -1,0 +1,22 @@
+diff -urN a/zen/ring_buffer.h b/zen/ring_buffer.h
+--- a/zen/ring_buffer.h	2018-10-14 23:43:51.753275048 +0200
++++ b/zen/ring_buffer.h	2018-10-14 23:45:01.907279938 +0200
+@@ -10,6 +10,7 @@
+ #include <cassert>
+ #include <vector>
+ #include <stdexcept>
++#include <cstddef>
+ #include "scope_guard.h"
+ #include "string_tools.h"
+ 
+diff -urN a/zen/serialize.h b/zen/serialize.h
+--- a/zen/serialize.h	2018-10-14 23:43:51.753275048 +0200
++++ b/zen/serialize.h	2018-10-14 23:45:03.227280030 +0200
+@@ -9,6 +9,7 @@
+ 
+ #include <functional>
+ #include <cstdint>
++#include <cstddef>
+ #include "string_base.h"
+ //keep header clean from specific stream implementations! (e.g.file_io.h)! used by abstract.h!
+ 
