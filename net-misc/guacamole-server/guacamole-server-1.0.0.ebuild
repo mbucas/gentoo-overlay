@@ -50,6 +50,9 @@ src_configure() {
 		$(use_with vorbis) \
 		$(use_with telnet) \
 		$(use_with ssl)
+
+    # guacenc.c:79:5: error: ‘avcodec_register_all’ is deprecated [-Werror=deprecated-declarations]
+    sed -i s/-Werror// src/guacenc/Makefile
 }
 
 src_install() {
