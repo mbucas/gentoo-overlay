@@ -1,0 +1,48 @@
+diff -urN a/FreeFileSync/Source/afs/ftp.cpp b/FreeFileSync/Source/afs/ftp.cpp
+--- a/FreeFileSync/Source/afs/ftp.cpp	2019-09-17 11:22:58.000000000 +0200
++++ b/FreeFileSync/Source/afs/ftp.cpp	2019-11-10 12:49:11.000000000 +0100
+@@ -543,7 +543,7 @@
+         ZEN_ON_SCOPE_EXIT(::curl_slist_free_all(quote));
+         quote = ::curl_slist_append(quote, ftpCmd.c_str());
+ 
+-        return perform(AfsPath(), true /*isDir*/, CURLFTPMETHOD_FULLPATH, //really avoid needless CWDs unlike buggy(!) CURLFTPMETHOD_NOCWD
++        return perform(AfsPath(), true /*isDir*/, CURLFTPMETHOD_SINGLECWD, //really avoid needless CWDs unlike buggy(!) CURLFTPMETHOD_NOCWD
+         {
+             { CURLOPT_NOBODY, 1L },
+             { CURLOPT_QUOTE, quote },
+@@ -1021,7 +1021,7 @@
+                     }();
+ 
+                     if (!pathHasWildcards)
+-                        pathMethod = CURLFTPMETHOD_FULLPATH; //16% faster traversal compared to CURLFTPMETHOD_SINGLECWD (35% faster than CURLFTPMETHOD_MULTICWD)
++                        pathMethod = CURLFTPMETHOD_SINGLECWD; //16% faster traversal compared to CURLFTPMETHOD_SINGLECWD (35% faster than CURLFTPMETHOD_MULTICWD)
+                 }
+                 //else: use "LIST" + CURLFTPMETHOD_SINGLECWD
+                 //caveat: let's better not use LIST parameters: https://cr.yp.to/ftp/list.html
+@@ -1591,7 +1591,7 @@
+     {
+         accessFtpSession(login, [&](FtpSession& session) //throw SysError
+         {
+-            session.perform(afsFilePath, false /*isDir*/, CURLFTPMETHOD_FULLPATH, //are there any servers that require CURLFTPMETHOD_SINGLECWD? let's find out
++            session.perform(afsFilePath, false /*isDir*/, CURLFTPMETHOD_SINGLECWD, //are there any servers that require CURLFTPMETHOD_SINGLECWD? let's find out
+             {
+                 { CURLOPT_WRITEDATA, &onBytesReceived },
+                 { CURLOPT_WRITEFUNCTION, onBytesReceivedWrapper },
+@@ -1657,7 +1657,7 @@
+ 
+                 //optimize fail-safe copy with RNFR/RNTO as CURLOPT_POSTQUOTE? -> even slightly *slower* than RNFR/RNTO as additional curl_easy_perform()
+             */
+-            session.perform(afsFilePath, false /*isDir*/, CURLFTPMETHOD_FULLPATH, //are there any servers that require CURLFTPMETHOD_SINGLECWD? let's find out
++            session.perform(afsFilePath, false /*isDir*/, CURLFTPMETHOD_SINGLECWD, //are there any servers that require CURLFTPMETHOD_SINGLECWD? let's find out
+             {
+                 { CURLOPT_UPLOAD, 1L },
+                 { CURLOPT_READDATA, &getBytesToSend },
+@@ -2126,7 +2126,7 @@
+                 quote = ::curl_slist_append(quote, ("RNFR " + session.getServerRelPathInternal(pathFrom,       login_.timeoutSec)).c_str()); //throw SysError
+                 quote = ::curl_slist_append(quote, ("RNTO " + session.getServerRelPathInternal(pathTo.afsPath, login_.timeoutSec)).c_str()); //
+ 
+-                session.perform(AfsPath(), true /*isDir*/, CURLFTPMETHOD_FULLPATH, //really avoid needless CWDs unlike buggy(!) CURLFTPMETHOD_NOCWD
++                session.perform(AfsPath(), true /*isDir*/, CURLFTPMETHOD_SINGLECWD, //really avoid needless CWDs unlike buggy(!) CURLFTPMETHOD_NOCWD
+                 {
+                     { CURLOPT_NOBODY, 1L },
+                     { CURLOPT_QUOTE, quote },
