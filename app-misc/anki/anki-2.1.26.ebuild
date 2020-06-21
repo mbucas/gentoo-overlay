@@ -3,14 +3,14 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{6,7} )
 PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 xdg
 
 DESCRIPTION="A spaced-repetition memory training program (flash cards)"
 HOMEPAGE="https://apps.ankiweb.net"
-SRC_URI="https://apps.ankiweb.net/downloads/current/${P}-source.tgz -> ${P}.tgz"
+SRC_URI="https://github.com/ankitects/anki/archive/${PV}.tar.gz -> ${P}.tgz"
 
 S="${WORKDIR}/${P}"
 
@@ -21,15 +21,17 @@ IUSE="latex +recording +sound test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/PyQt5[gui,svg,widgets,${PYTHON_USEDEP}]
-	dev-python/PyQtWebEngine[${PYTHON_USEDEP}]
-	>=dev-python/httplib2-0.7.4[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:4[${PYTHON_USEDEP}]
-	dev-python/decorator[${PYTHON_USEDEP}]
-	dev-python/markdown[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/send2trash[${PYTHON_USEDEP}]
-	dev-python/jsonschema[${PYTHON_USEDEP}]
+    $(python_gen_cond_dep '
+        dev-python/PyQt5[gui,svg,widgets,${PYTHON_MULTI_USEDEP}]
+        dev-python/PyQtWebEngine[${PYTHON_MULTI_USEDEP}]
+        >=dev-python/httplib2-0.7.4[${PYTHON_MULTI_USEDEP}]
+        dev-python/beautifulsoup:4[${PYTHON_MULTI_USEDEP}]
+        dev-python/decorator[${PYTHON_MULTI_USEDEP}]
+        dev-python/markdown[${PYTHON_MULTI_USEDEP}]
+        dev-python/requests[${PYTHON_MULTI_USEDEP}]
+        dev-python/send2trash[${PYTHON_MULTI_USEDEP}]
+        dev-python/jsonschema[${PYTHON_MULTI_USEDEP}]
+    ') 
 	recording? ( media-sound/lame )
 	sound? ( media-video/mpv )
 	latex? (
@@ -38,10 +40,10 @@ RDEPEND="${PYTHON_DEPS}
 	)
 "
 DEPEND="${RDEPEND}
-	test? ( dev-python/nose[${PYTHON_USEDEP}] )
+    $(python_gen_cond_dep '
+        test? ( dev-python/nose[${PYTHON_MULTI_USEDEP}] )
+    ') 
 "
-
-PATCHES=( "${FILESDIR}"/${PN}-2.1.0_beta25-web-folder.patch )
 
 pkg_setup() {
 	python-single-r1_pkg_setup
@@ -50,7 +52,7 @@ pkg_setup() {
 src_prepare() {
 	default
 	sed -i -e "s/updates=True/updates=False/" \
-		aqt/profiles.py || die
+		qt/aqt/profiles.py || die
 }
 
 src_compile() {
@@ -68,20 +70,19 @@ src_test() {
 }
 
 src_install() {
-	doicon ${PN}.png
-	domenu ${PN}.desktop
-	doman ${PN}.1
+	doicon qt/${PN}.png
+	domenu qt/${PN}.desktop
+	doman qt/${PN}.1
 
 	dodoc README.md README.development
-	python_domodule aqt anki
-	python_newscript runanki anki
+	python_domodule qt/aqt pylib/anki
+	python_newscript qt/runanki anki
 
 	# Localization files go into the anki directory:
-	python_moduleinto anki
-	python_domodule locale
+	python_moduleinto pylib/anki
 
 	# not sure if this is correct, but
 	# site-packages/aqt/mediasrv.py wants the directory
 	insinto /usr/share/anki
-	doins -r web
+	doins -r qt/aqt_data/web
 }
