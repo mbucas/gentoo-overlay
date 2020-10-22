@@ -1,0 +1,134 @@
+diff -urN a/FreeFileSync/Source/Makefile b/FreeFileSync/Source/Makefile
+--- a/FreeFileSync/Source/Makefile	2020-05-17 23:42:02.000000000 +0200
++++ b/FreeFileSync/Source/Makefile	2020-08-02 10:10:19.724743421 +0200
+@@ -1,10 +1,18 @@
+-exeName = FreeFileSync_$(shell arch)
++# We are building for a single target arch
++exeName = FreeFileSync
++prefix      = /usr
++BINDIR      = $(DESTDIR)$(prefix)/bin
++SHAREDIR    = $(DESTDIR)$(prefix)/share
++APPSHAREDIR = $(SHAREDIR)/$(EXENAME)
++DOCSHAREDIR = $(SHAREDIR)/doc/$(EXENAME)
+ 
+-cxxFlags = -std=c++2a -pipe -DWXINTL_NO_GETTEXT_MACRO -I../.. -I../../zenXml -include "zen/i18n.h" -include "zen/warn_static.h" \
++# Add $(CXXFLAGS) and remove -O3 to respect system CXXFLAGS, add -DZEN_LINUX and SFTP parameters
++cxxFlags = $(CXXFLAGS) -std=c++2a -pipe -DWXINTL_NO_GETTEXT_MACRO -I../.. -I../../zenXml -include "zen/i18n.h" -include "zen/warn_static.h" \
+            -Wall -Wfatal-errors -Wmissing-include-dirs -Wswitch-enum -Wcast-align -Wshadow -Wnon-virtual-dtor \
+-           -O3 -DNDEBUG `wx-config --cxxflags --debug=no` -pthread
++           -DNDEBUG `wx-config --cxxflags --debug=no` -pthread -DZEN_LINUX -DMAX_SFTP_OUTGOING_SIZE=30000 -DMAX_SFTP_READ_SIZE=30000
+ 
+-linkFlags = -s -no-pie `wx-config --libs std, aui --debug=no` -pthread
++# Remove -s because stripping is done by emerge, add -lz
++linkFlags = -no-pie -lz `wx-config --libs std, aui --debug=no` -pthread
+ 
+ 
+ cxxFlags  += `pkg-config --cflags openssl`
+@@ -16,9 +24,10 @@
+ cxxFlags  += `pkg-config --cflags libssh2`
+ linkFlags += `pkg-config --libs   libssh2`
+ 
+-cxxFlags  += `pkg-config --cflags gtk+-2.0`
++cxxFlags  += `pkg-config --cflags gtk+-3.0`
++linkFlags += `pkg-config --cflags gtk+-3.0`
+ #treat as system headers so that warnings are hidden:
+-cxxFlags  += -isystem/usr/include/gtk-2.0
++cxxFlags  += -isystem/usr/include/gtk-3.0
+ 
+ #support for SELinux (optional)
+ SELINUX_EXISTING=$(shell pkg-config --exists libselinux && echo YES)
+@@ -106,7 +115,8 @@
+ cppFiles+=../../wx+/popup_dlg_generated.cpp
+ cppFiles+=../../xBRZ/src/xbrz.cpp
+ 
+-tmpPath = /tmp/$(exeName)_Make
++# Temp files in build tree instead of system /tmp
++tmpPath = ../Build/tmp/$(exeName)_Make
+ 
+ objFiles = $(cppFiles:%=$(tmpPath)/ffs/src/%.o)
+ 
+@@ -114,12 +124,22 @@
+ 
+ ../Build/Bin/$(exeName): $(objFiles)
+ 	mkdir -p $(dir $@)
+-	g++ -o $@ $^ $(linkFlags)
++	g++-10.2.0 -o $@ $^ $(linkFlags)
+ 
+ $(tmpPath)/ffs/src/%.o : %
+ 	mkdir -p $(dir $@)
+-	g++ $(cxxFlags) -c $< -o $@
++	g++-10.2.0 $(cxxFlags) -c $< -o $@
+ 
+ clean:
+ 	rm -rf $(tmpPath)
+ 	rm -f ../Build/Bin/$(exeName)
++
++install:
++	mkdir -p $(BINDIR)
++	cp ../Build/Bin/$(exeName) $(BINDIR)
++
++	mkdir -p $(APPSHAREDIR)
++	cp -R ../Build/Resources/ $(APPSHAREDIR)
++
++	mkdir -p $(DOCSHAREDIR)
++	cp ../../Changelog.txt $(DOCSHAREDIR)/CHANGELOG
+diff -urN a/FreeFileSync/Source/RealTimeSync/Makefile b/FreeFileSync/Source/RealTimeSync/Makefile
+--- a/FreeFileSync/Source/RealTimeSync/Makefile	2020-05-17 23:42:52.000000000 +0200
++++ b/FreeFileSync/Source/RealTimeSync/Makefile	2020-08-02 10:31:23.751483319 +0200
+@@ -1,15 +1,21 @@
+-exeName = RealTimeSync_$(shell arch)
++# We are building for a single target arch
++exeName = RealTimeSync
++prefix = /usr
++BINDIR = $(DESTDIR)$(prefix)/bin
+ 
+-cxxFlags = -std=c++2a -pipe -DWXINTL_NO_GETTEXT_MACRO -I../../.. -I../../../zenXml -include "zen/i18n.h" -include "zen/warn_static.h" \
++# Add $(CXXFLAGS) and remove -O3 to respect system CXXFLAGS, add -DZEN_LINUX and SFTP parameters
++cxxFlags = $(CXXFLAGS) -std=c++2a -pipe -DWXINTL_NO_GETTEXT_MACRO -I../../.. -I../../../zenXml -include "zen/i18n.h" -include "zen/warn_static.h" \
+            -Wall -Wfatal-errors -Wmissing-include-dirs -Wswitch-enum -Wcast-align -Wshadow -Wnon-virtual-dtor \
+-           -O3 -DNDEBUG `wx-config --cxxflags --debug=no` -pthread
++           -DNDEBUG `wx-config --cxxflags --debug=no` -pthread -DZEN_LINUX -DMAX_SFTP_OUTGOING_SIZE=30000 -DMAX_SFTP_READ_SIZE=30000
+ 
+-linkFlags = -s -no-pie `wx-config --libs std, aui --debug=no` -pthread
++# Remove -s because stripping is done by emerge, add -lz
++linkFlags = -no-pie -lz `wx-config --libs std, aui --debug=no` -pthread
+ 
+ #Gtk - support "no button border"
+-cxxFlags  += `pkg-config --cflags gtk+-2.0`
++cxxFlags  += `pkg-config --cflags gtk+-3.0`
++linkFlags += `pkg-config --libs   gtk+-3.0`
+ #treat as system headers so that warnings are hidden:
+-cxxFlags  += -isystem/usr/include/gtk-2.0
++cxxFlags  += -isystem/usr/include/gtk-3.0
+ 
+ cppFiles=
+ cppFiles+=application.cpp
+@@ -44,7 +50,8 @@
+ cppFiles+=../../../wx+/taskbar.cpp
+ cppFiles+=../../../xBRZ/src/xbrz.cpp
+ 
+-tmpPath = /tmp/$(exeName)_Make
++# Temp files in build tree instead of system /tmp
++tmpPath = ../../Build/tmp/$(exeName)_Make
+ 
+ objFiles = $(cppFiles:%=$(tmpPath)/ffs/src/rts/%.o)
+ 
+@@ -52,12 +59,16 @@
+ 
+ ../../Build/Bin/$(exeName): $(objFiles)
+ 	mkdir -p $(dir $@)
+-	g++ -o $@ $^ $(linkFlags)
++	g++-10.2.0 -o $@ $^ $(linkFlags)
+ 
+ $(tmpPath)/ffs/src/rts/%.o : %
+ 	mkdir -p $(dir $@)
+-	g++ $(cxxFlags) -c $< -o $@
++	g++-10.2.0 $(cxxFlags) -c $< -o $@
+ 
+ clean:
+ 	rm -rf $(tmpPath)
+ 	rm -f ../../Build/Bin/$(exeName)
++
++install:
++	mkdir -p $(BINDIR)
++	cp ../../Build/Bin/$(exeName) $(BINDIR)
