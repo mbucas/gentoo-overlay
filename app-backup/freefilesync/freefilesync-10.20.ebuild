@@ -3,8 +3,7 @@
 
 EAPI="7"
 
-WX_GTK_VER="3.1"
-inherit desktop wxwidgets
+inherit desktop
 
 DESCRIPTION="FreeFileSync is a folder comparison and synchronization tool"
 HOMEPAGE="https://www.freefilesync.org/ https://sourceforge.net/projects/freefilesync/"
