@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=6
 
-inherit java-utils-2
+inherit eutils java-utils-2
 DESCRIPTION="Guacamole is a html5 vnc client as servlet"
 HOMEPAGE="https://guacamole.apache.org/"
 SRC_URI="http://mirrors.ircam.fr/pub/apache/guacamole/${PV}/source/guacamole-client-${PV}.tar.gz"
@@ -22,7 +22,7 @@ REQUIRED_USE="|| ( ldap mysql noauth postgres )"
 DEPEND="dev-java/maven-bin:*"
 
 RDEPEND="${DEPEND}
-	|| ( www-servers/tomcat:7[websockets] www-servers/tomcat )
+	|| ( www-servers/tomcat:7[websockets] www-servers/tomcat:8 www-servers/tomcat:9 )
 	>virtual/jre-1.6
 	net-misc/guacamole-server
 	mysql? ( virtual/mysql dev-java/jdbc-mysql )
