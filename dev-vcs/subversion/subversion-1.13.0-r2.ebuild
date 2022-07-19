@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 USE_RUBY="ruby26 ruby25 ruby24"
@@ -9,7 +9,7 @@ DISTUTILS_OPTIONAL=1
 WANT_AUTOMAKE="none"
 GENTOO_DEPEND_ON_PERL="no"
 
-inherit autotools bash-completion-r1 db-use depend.apache distutils-r1 flag-o-matic java-pkg-opt-2 libtool ltprune multilib perl-module ruby-single toolchain-funcs xdg-utils
+inherit autotools bash-completion-r1 db-use depend.apache distutils-r1 flag-o-matic java-pkg-opt-2 libtool multilib perl-module ruby-single toolchain-funcs xdg-utils
 
 MY_P="${P/_/-}"
 DESCRIPTION="Advanced version control system"
@@ -54,7 +54,6 @@ COMMON_DEPEND="
 	)
 	perl? ( dev-lang/perl:= )
 	python? ( ${PYTHON_DEPS} )
-	ruby? ( ${RUBY_DEPS} )
 	sasl? ( dev-libs/cyrus-sasl )"
 RDEPEND="${COMMON_DEPEND}
 	apache2? ( www-servers/apache[apache2_modules_dav] )
@@ -183,6 +182,8 @@ src_prepare() {
 	fi
 
 	xdg_environment_reset
+    
+    use python && distutils-r1_src_prepare || die
 }
 
 src_configure() {
@@ -272,6 +273,8 @@ src_configure() {
 	ac_cv_path_RDOC=$(usex ruby "${EPREFIX}/usr/bin/rdoc${RB_VER}" "none") \
 	ac_cv_python_includes='-I$(PYTHON_INCLUDEDIR)' \
 	econf "${myconf[@]}"
+    
+    use python && distutils-r1_src_configure || die
 }
 
 src_compile() {
@@ -292,15 +295,19 @@ src_compile() {
 			rm -f ${p} || die
 			ln -s "${BUILD_DIR}" ${p} || die
 
-			python_export PYTHON_INCLUDEDIR
+			export PYTHON_INCLUDEDIR=$(python_get_includedir)
 			emake swig-py \
 				swig_pydir="$(python_get_sitedir)/libsvn" \
 				swig_pydir_extra="$(python_get_sitedir)/svn"
 		}
 
-		# this will give us proper BUILD_DIR for symlinking
-		BUILD_DIR=python \
-		python_foreach_impl swig_py_compile
+#		# this will give us proper BUILD_DIR for symlinking
+#		BUILD_DIR=python \
+#		python_foreach_impl swig_py_compile
+
+        # this will give us proper BUILD_DIR for symlinking
+		BUILD_DIR=python-python2_7 \
+		swig_py_compile
 	fi
 
 	if use perl ; then
@@ -348,8 +355,11 @@ src_test() {
 				popd >/dev/null || die
 			}
 
-			BUILD_DIR=subversion/bindings/swig/python \
-			python_foreach_impl swig_py_test
+#			BUILD_DIR=subversion/bindings/swig/python \
+#			python_foreach_impl swig_py_test
+
+            BUILD_DIR=subversion/bindings/swig/python-python2_7 \
+			swig_py_test
 		fi
 	else
 		ewarn "The test suite shows errors when there is an older version of"
@@ -374,6 +384,7 @@ src_install() {
 			rm -f ${p} || die
 			ln -s "${BUILD_DIR}" ${p} || die
 
+			export PYTHON_INCLUDEDIR=$(python_get_includedir)
 			emake \
 				DESTDIR="${D}" \
 				swig_pydir="$(python_get_sitedir)/libsvn" \
@@ -381,8 +392,11 @@ src_install() {
 				install-swig-py
 		}
 
-		BUILD_DIR=python \
-		python_foreach_impl swig_py_install
+#		BUILD_DIR=python \
+#		python_foreach_impl swig_py_install
+
+		BUILD_DIR=python-python2_7 \
+		swig_py_install
 	fi
 
 	if use perl ; then
@@ -468,7 +482,7 @@ src_install() {
 		fi
 	fi
 
-	prune_libtool_files --all
+	find "${ED}" -type f -name '*.la' -delete || die
 
 	cd "${ED%/}"/usr/share/locale
 	for i in * ; do
