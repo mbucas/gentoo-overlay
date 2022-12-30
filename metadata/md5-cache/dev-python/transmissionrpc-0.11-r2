@@ -1,0 +1,16 @@
+BDEPEND=python_targets_python3_9? ( >=dev-lang/python-3.9.16:3.9 ) python_targets_python3_10? ( >=dev-lang/python-3.10.9:3.10 ) >=dev-python/setuptools-65.5.1[python_targets_python3_9(-)?,python_targets_python3_10(-)?]
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND=>=dev-python/six-1.1.0[python_targets_python3_9(-)?,python_targets_python3_10(-)?] dev-python/setuptools[python_targets_python3_9(-)?,python_targets_python3_10(-)?]
+DESCRIPTION=Python module that implements the Transmission bittorrent client RPC protocol
+EAPI=7
+HOMEPAGE=https://bitbucket.org/blueluna/transmissionrpc
+INHERIT=distutils-r1
+IUSE=python_targets_python3_9 python_targets_python3_10
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND=>=dev-python/six-1.1.0[python_targets_python3_9(-)?,python_targets_python3_10(-)?] python_targets_python3_9? ( >=dev-lang/python-3.9.16:3.9 ) python_targets_python3_10? ( >=dev-lang/python-3.10.9:3.10 )
+REQUIRED_USE=|| ( python_targets_python3_9 python_targets_python3_10 )
+SLOT=0
+SRC_URI=mirror://pypi/t/transmissionrpc/transmissionrpc-0.11.tar.gz https://bitbucket.org/blueluna/transmissionrpc/src/release-0.10/test/data/ubuntu-12.04.2-alternate-amd64.iso.torrent
+_eclasses_=distutils-r1	9c5f8e35fdc556c29573796aca3e87ea	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multibuild	d26d81f242cb193d899a72bca423d0bd	multilib	5ca4e49abed8e3a2f7b56920eadee157	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	38c85b725d0467e51954ea921b6c104b	python-r1	ca02b49ab4dd44b606c151aa296ef399	python-utils-r1	1d1b325c00c1d24c564a1b49327ec3c5	toolchain-funcs	37a4612ce5522df5a100359a8dbc8491
+_md5_=18ffa1fd150e8884ee7188d30ca4e32b
