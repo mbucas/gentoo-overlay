@@ -1,15 +1,15 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_9 )
+PYTHON_COMPAT=( python3_10 )
 
-inherit distutils-r1 gnome2-utils versionator
+inherit distutils-r1 gnome2-utils
 
 DESCRIPTION="Onscreen keyboard for everybody who can't use a hardware keyboard"
 HOMEPAGE="https://launchpad.net/onboard"
-SRC_URI="https://launchpad.net/${PN}/$(get_version_component_range 1-2)/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/$(ver_cut 1-2)/${PV}/+download/${P}.tar.gz"
 
 # po/* are licensed under BSD 3-clause
 LICENSE="GPL-3+ BSD"
