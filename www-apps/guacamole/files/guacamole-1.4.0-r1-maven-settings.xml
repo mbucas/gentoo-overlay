@@ -20,6 +20,6 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <localRepository>/var/tmp/portage/www-apps/guacamole-1.4.0/homedir/.m2</localRepository>
+    <localRepository>/var/tmp/portage/www-apps/guacamole-1.4.0-r1/homedir/.m2</localRepository>
     <interactiveMode>false</interactiveMode>
 </settings>
