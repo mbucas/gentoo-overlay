@@ -1,0 +1,34 @@
+#!/sbin/openrc-run
+# Copyright 1999-2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+pidfile="/run/webssh.pid"
+command_args="--address=${WEBSSH_HTTP_ADDRESS} --port=${WEBSSH_HTTP_PORT}"
+
+depend() {
+    use net
+}
+
+start() {
+    ebegin "Starting WebSSH"
+    start-stop-daemon \
+        --start \
+        --background \
+        --pidfile ${pidfile} \
+        --make-pidfile \
+        --user ${WEBSSH_USER} \
+        --group ${WEBSSH_GROUP} \
+        --stdout ${WEBSSH_LOGFILE} \
+        --stderr ${WEBSSH_LOGFILE} \
+        --exec /usr/bin/wssh \
+        -- ${command_args}
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping WebSSH"
+    start-stop-daemon \
+        --stop \
+        --pidfile ${pidfile}
+    eend $?
+}
