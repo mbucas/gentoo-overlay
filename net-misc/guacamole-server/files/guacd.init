@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+# Copyright 1999-2023 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+pidfile="/run/guacd/guacd.pid"
+command="/usr/sbin/guacd"
+command_args="-b ${GUACD_HOST} -l ${GUACD_PORT} -p ${pidfile}"
+
+depend() {
+    use net
+}
+
+start() {
+    checkpath -q -d -m 0755 -o ${GUACD_USER}:${GUACD_GROUP} $(dirname "${pidfile}")
+    ebegin "Starting guacd"
+    start-stop-daemon \
+        --start \
+        --user ${GUACD_USER} \
+        --group ${GUACD_GROUP} \
+        --exec ${command} \
+        -- ${command_args}
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping guacd"
+    start-stop-daemon \
+        --stop \
+        --pidfile ${pidfile}
+    eend $?
+}
