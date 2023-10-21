@@ -6,11 +6,8 @@ EAPI=8
 inherit webapp
 
 DESCRIPTION="Database management in a single PHP file"
-HOMEPAGE="https://www.adminer.org/en/"
-SRC_URI="
-    https://github.com/vrana/adminer/releases/download/v${PV}/adminer-${PV}.php
-    https://raw.githubusercontent.com/vrana/adminer/master/designs/mvt/adminer.css
-"
+HOMEPAGE="https://docs.adminerevo.org/"
+SRC_URI="https://github.com/adminerevo/adminerevo/releases/download/v${PV}/adminer-${PV}.php"
 LICENSE="GPL-2 Apache"
 
 KEYWORDS="~amd64"
@@ -33,14 +30,14 @@ src_unpack() {
     mkdir -p "${S}" || die
     # Source isn't compressed, just minified PHP
     cp "${DISTDIR}/adminer-${PV}.php" "${S}/index.php" || die
-    cp "${DISTDIR}/adminer.css" "${S}/adminer.css" || die
 }
 
 src_install() {
 	webapp_src_preinst
 
 	insinto "${MY_HTDOCSDIR}"
-	doins -r .
+	doins index.php
+    newins "${FILESDIR}"/adminer.css adminer.css
 
 	webapp_src_install
 }
