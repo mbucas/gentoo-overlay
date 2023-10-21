@@ -40,6 +40,7 @@ DEPEND="${RDEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/guacamole-${PV}-configure-ac.patch
+    "${FILESDIR}"/guacamole-${PV}-ffmpeg-5.patch
 )
 
 src_prepare() {

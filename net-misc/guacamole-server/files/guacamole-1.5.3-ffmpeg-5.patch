@@ -1,0 +1,63 @@
+diff -Nur a/src/guacenc/ffmpeg-compat.c b/src/guacenc/ffmpeg-compat.c
+--- a/src/guacenc/ffmpeg-compat.c	2023-07-14 18:34:27.000000000 +0200
++++ b/src/guacenc/ffmpeg-compat.c	2023-10-21 11:16:55.165378960 +0200
+@@ -213,7 +213,7 @@
+ #endif
+ }
+ 
+-AVCodecContext* guacenc_build_avcodeccontext(AVStream* stream, AVCodec* codec, 
++AVCodecContext* guacenc_build_avcodeccontext(AVStream* stream, const AVCodec* codec,
+         int bitrate, int width, int height, int gop_size, int qmax, int qmin,
+         int pix_fmt, AVRational time_base) {
+ 
+@@ -249,7 +249,7 @@
+ }
+ 
+ int guacenc_open_avcodec(AVCodecContext *avcodec_context,
+-        AVCodec *codec, AVDictionary **options,
++        const AVCodec *codec, AVDictionary **options,
+         AVStream* stream) {
+ 
+     int ret = avcodec_open2(avcodec_context, codec, options);
+diff -Nur a/src/guacenc/ffmpeg-compat.h b/src/guacenc/ffmpeg-compat.h
+--- a/src/guacenc/ffmpeg-compat.h	2023-07-14 18:34:27.000000000 +0200
++++ b/src/guacenc/ffmpeg-compat.h	2023-10-21 11:17:45.358709502 +0200
+@@ -128,7 +128,7 @@
+  *     The pointer to the configured AVCodecContext.
+  *
+  */
+-AVCodecContext* guacenc_build_avcodeccontext(AVStream* stream, AVCodec* codec,
++AVCodecContext* guacenc_build_avcodeccontext(AVStream* stream, const AVCodec* codec,
+         int bitrate, int width, int height, int gop_size, int qmax, int qmin,
+         int pix_fmt, AVRational time_base);
+ 
+@@ -158,7 +158,7 @@
+  *     Zero on success, a negative value on error.
+  */
+ int guacenc_open_avcodec(AVCodecContext *avcodec_context,
+-        AVCodec *codec, AVDictionary **options,
++        const AVCodec *codec, AVDictionary **options,
+         AVStream* stream);
+ 
+ #endif
+diff -Nur a/src/guacenc/video.c b/src/guacenc/video.c
+--- a/src/guacenc/video.c	2023-07-14 18:34:27.000000000 +0200
++++ b/src/guacenc/video.c	2023-10-21 11:18:23.988707353 +0200
+@@ -47,7 +47,7 @@
+ guacenc_video* guacenc_video_alloc(const char* path, const char* codec_name,
+         int width, int height, int bitrate) {
+ 
+-    AVOutputFormat *container_format;
++    const AVOutputFormat *container_format;
+     AVFormatContext *container_format_context;
+     AVStream *video_stream;
+     int ret;
+@@ -63,7 +63,7 @@
+     container_format = container_format_context->oformat;
+ 
+     /* Pull codec based on name */
+-    AVCodec* codec = avcodec_find_encoder_by_name(codec_name);
++    const AVCodec* codec = avcodec_find_encoder_by_name(codec_name);
+     if (codec == NULL) {
+         guacenc_log(GUAC_LOG_ERROR, "Failed to locate codec \"%s\".",
+                 codec_name);
