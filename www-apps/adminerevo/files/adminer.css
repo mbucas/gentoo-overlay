@@ -404,7 +404,7 @@ tr.odd td {
 }
 
 .js .hidden {
-	display: initial;
+	display: contents;
 }
 
 .js input.hidden, .js td.hidden {
