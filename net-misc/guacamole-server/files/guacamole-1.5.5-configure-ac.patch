@@ -1,0 +1,12 @@
+diff -Nur a/configure.ac b/configure.ac
+--- a/configure.ac	2024-03-30 04:47:24.000000000 +0100
++++ b/configure.ac	2024-04-09 12:11:00.717536936 +0200
+@@ -257,7 +257,7 @@
+ AC_ARG_WITH([libavformat],
+ 	    [AS_HELP_STRING([--with-libavformat],
+ 	                    [use libavformat when encoding video @<:@default=check@:>@])],
+-            [].
++            [],
+             [with_libavformat=check])
+ if test "x$with_libavformat" != "xno"
+ then
