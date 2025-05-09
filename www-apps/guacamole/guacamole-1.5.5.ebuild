@@ -44,20 +44,21 @@ src_compile() {
 }
 
 src_install() {
+	EXTENSIONS="${WORKDIR}/${PN}-client-${PV}/extensions"
 	#echo guacd-hostname: localhost >>"${S}/${PN}/doc/example/${PN}.properties"
 	#echo guacd-port:     4822 >>"${S}/${PN}/doc/example/${PN}.properties"
 	#echo basic-user-mapping: /etc/guacamole/user-mapping.xml >>"${S}/${PN}/doc/example/${PN}.properties"
 	if use mysql || use postgres; then
 		insinto "/etc/${PN}/extensions"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-base/" -name '*.jar' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-base/" -name '*.jar' -exec doins '{}' +
 	fi
 	if use noauth; then
 		#sed -e 's:basic-user-mapping:#basic-user-mapping:' -i "${S}/${PN}/doc/example/${PN}.properties"
 		#echo noauth-config: /etc/guacamole/noauth-config.xml  >>"${S}/${PN}/doc/example/${PN}.properties"
 		insinto "/etc/${PN}/extensions"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-noauth/" -name '*.jar' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-noauth/" -name '*.jar' -exec doins '{}' +
 		insinto "/etc/guacamole"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-noauth/doc/example/" -name '*.xml' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-noauth/doc/example/" -name '*.xml' -exec doins '{}' +
 		elog "Warning: Setting No Authentication is obviously very insecure! Only use it if you know what you are doing!"
 	fi
 	if use mysql; then
@@ -68,9 +69,9 @@ src_install() {
 		#echo mysql-password: some_password >>"${S}/${PN}/doc/example/${PN}.properties"
 		#sed -e 's:basic-user-mapping:#basic-user-mapping:' -i "${S}/${PN}/doc/example/${PN}.properties"
 		insinto "/etc/${PN}/extensions"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-mysql/" -name '*.jar' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-mysql/" -name '*.jar' -exec doins '{}' +
 		insinto "/usr/share/${PN}/schema/mysql"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-mysql/schema/" -name '*.sql' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-mysql/schema/" -name '*.sql' -exec doins '{}' +
 		elog "Please add a mysql database and a user and load the sql files in /usr/share/guacamole/schema/ into it."
 		elog "If this is an update, then you will need to apply the appropriate update script in the location above."
 		elog "You will also need to adjust the DB properties in /etc/guacamole.properties!"
@@ -88,9 +89,9 @@ src_install() {
 		#echo postgresql-password: some_password >>"${S}/${PN}/doc/example/${PN}.properties"
 		#sed -e 's:basic-user-mapping:#basic-user-mapping:' -i "${S}/${PN}/doc/example/${PN}.properties"
 		insinto "/etc/${PN}/extensions"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-postgresql/" -name '*.jar' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-postgresql/" -name '*.jar' -exec doins '{}' +
 		insinto "/usr/share/${PN}/schema/postgres"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-postgresql/schema/" -name '*.sql' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-jdbc/modules/${PN}-auth-jdbc-postgresql/schema/" -name '*.sql' -exec doins '{}' +
 		elog "Please add a postgresql database and a user and load the sql files in /usr/share/guacamole/schema/ into it."
 		elog "If this is an update, then you will need to apply the appropriate update script in the location above."
 		elog "You will also need to adjust the DB properties in /etc/guacamole.properties!"
@@ -108,9 +109,10 @@ src_install() {
 		#echo ldap-config-base-dn: ou=groups,dc=example,dc=net >>"${S}/${PN}/doc/example/${PN}.properties"
 		#sed -e 's:basic-user-mapping:#basic-user-mapping:' -i "${S}/${PN}/doc/example/${PN}.properties"
 		insinto "/etc/${PN}/extensions"
-		find "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-ldap" -name '*.jar' -exec doins '{}' +
+		find "${EXTENSIONS}/${PN}-auth-ldap" -name '*.jar' -exec doins '{}' +
 		insinto "/usr/share/${PN}/schema"
-		doins "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-ldap/schema/guacConfigGroup.ldif" "${WORKDIR}/${PN}-client-${PV}/extensions/${PN}-auth-ldap/schema/guacConfigGroup.schema"
+		doins "${EXTENSIONS}/${PN}-auth-ldap/schema/guacConfigGroup.ldif"
+		doins "${EXTENSIONS}/${PN}-auth-ldap/schema/guacConfigGroup.schema"
 		elog "You will need to add and load the .schema file in /usr/share/guacamole/schema/ to your ldap server."
 		elog "There is also an example .lidf file for creating the users."
 		elog "-"
