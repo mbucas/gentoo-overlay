@@ -8,18 +8,17 @@ inherit webapp
 DESCRIPTION="Single-file PHP file manager"
 HOMEPAGE="https://tinyfilemanager.github.io/"
 SRC_URI="https://github.com/prasathmani/tinyfilemanager/archive/refs/tags/${PV}.tar.gz -> ${PN}.${PV}.tar.gz"
+S="${WORKDIR}/${P}"
+
 LICENSE="GPL-3"
 
 KEYWORDS="~amd64"
 
-DEPEND=""
 RDEPEND="
 	virtual/httpd-php:8.2
 	dev-lang/php:8.2
 	dev-lang/php[fileinfo,iconv,zip]
 "
-
-S="${WORKDIR}/${P}"
 
 PATCHES=(
 	"${FILESDIR}"/tinyfilemanager-${PV}-personal-changes.patch
