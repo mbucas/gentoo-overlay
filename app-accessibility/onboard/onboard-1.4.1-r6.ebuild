@@ -3,7 +3,8 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_13 )
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{12,13} )
 
 inherit distutils-r1 gnome2-utils
 
@@ -21,7 +22,6 @@ COMMON_DEPEND="app-text/hunspell:=
 	dev-python/dbus-python[${PYTHON_USEDEP}]
 	dev-python/pycairo[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
-	dev-python/python-distutils-extra[${PYTHON_USEDEP}]
 	gnome-base/dconf
 	gnome-base/gsettings-desktop-schemas
 	gnome-base/librsvg
