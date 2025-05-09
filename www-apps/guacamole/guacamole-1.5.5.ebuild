@@ -13,18 +13,18 @@ LICENSE="MIT"
 
 SLOT="0"
 
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 IUSE="ldap mysql noauth postgres"
 
 REQUIRED_USE="|| ( ldap mysql noauth postgres )"
 
 DEPEND="
-    virtual/jdk:11
-    dev-java/maven-bin:*"
+	virtual/jdk:11
+	dev-java/maven-bin:*"
 
 RDEPEND="${DEPEND}
-	|| ( www-servers/tomcat:7[websockets] www-servers/tomcat:8 www-servers/tomcat:9 )
+	www-servers/tomcat:9
 	virtual/jre:11
 	net-misc/guacamole-server
 	mysql? ( virtual/mysql dev-java/jdbc-mysql )
@@ -36,7 +36,7 @@ RESTRICT="network-sandbox"
 
 src_prepare() {
 	cp "${FILESDIR}"/${PF}-maven-settings.xml "${S}"/settings.xml
-    default
+	default
 }
 
 src_compile() {
