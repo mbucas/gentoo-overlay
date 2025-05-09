@@ -6,7 +6,6 @@
 		<name>Mickaël Bucas</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="pypi">transmissionrpc</remote-id>
-		<remote-id type="bitbucket">blueluna/transmissionrpc</remote-id>
+		<remote-id type="github">adminerevo/adminerevo</remote-id>
 	</upstream>
 </pkgmetadata>
