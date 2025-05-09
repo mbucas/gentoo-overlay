@@ -8,12 +8,14 @@ inherit webapp
 DESCRIPTION="Database management in a single PHP file"
 HOMEPAGE="https://docs.adminerevo.org/"
 SRC_URI="https://github.com/adminerevo/adminerevo/releases/download/v${PV}/adminer-${PV}.php"
-LICENSE="GPL-2 Apache"
+S="${WORKDIR}/${PN}"
+
+LICENSE="GPL-2 Apache-1.0"
 
 KEYWORDS="~amd64"
+
 IUSE="+mysql postgres sqlite vhosts"
 
-DEPEND=""
 RDEPEND="
 	virtual/httpd-php:8.2
 	dev-lang/php:8.2
@@ -21,8 +23,6 @@ RDEPEND="
 	postgres? ( dev-lang/php[postgres] )
 	sqlite? ( dev-lang/php[sqlite] )
 "
-
-S="${WORKDIR}/${PN}"
 
 src_unpack() {
 	mkdir -p "${S}" || die
