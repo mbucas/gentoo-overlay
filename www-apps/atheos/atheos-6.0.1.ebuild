@@ -7,15 +7,15 @@ inherit webapp
 
 DESCRIPTION="Atheos Cloud Based IDE"
 HOMEPAGE="https://www.atheos.io/"
-SRC_URI="https://github.com/Atheos/Atheos/archive/refs/tags/v${PV//\./}.tar.gz"
+SRC_URI="https://github.com/Atheos/Atheos/archive/refs/tags/v${PV//\./}.tar.gz -> ${PN}.${PV}.tar.gz"
 LICENSE="MIT"
 
 KEYWORDS="~amd64"
 
 DEPEND=""
 RDEPEND="
-    virtual/httpd-php:8.2
-    dev-lang/php:8.2
+	virtual/httpd-php:8.2
+	dev-lang/php:8.2
 "
 
 S="${WORKDIR}/Atheos-${PV//\./}"
@@ -24,9 +24,9 @@ src_install() {
 	webapp_src_preinst
 
 	insinto "${MY_HTDOCSDIR}"
-    doins -r .
-    # Missing config.php
-    newins "${FILESDIR}"/config.php config.php
+	doins -r .
+	# Missing config.php
+	newins "${FILESDIR}"/config.php config.php
 
 	webapp_serverowned -R "${MY_HTDOCSDIR}"/config.php
 	webapp_serverowned -R "${MY_HTDOCSDIR}"/data
