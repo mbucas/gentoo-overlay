@@ -5,4 +5,7 @@
 		<email>mickael@bucas.name</email>
 		<name>Mickaël Bucas</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="sourceforge">freefilesync</remote-id>
+	</upstream>
 </pkgmetadata>

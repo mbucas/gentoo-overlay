@@ -8,17 +8,14 @@ inherit desktop wxwidgets
 
 DESCRIPTION="FreeFileSync is a folder comparison and synchronization tool"
 HOMEPAGE="https://www.freefilesync.org/ https://sourceforge.net/projects/freefilesync/"
-
-SRC_URI="
-	https://www.freefilesync.org/download/FreeFileSync_${PV}_Source.zip
-"
-RESTRICT="mirror"
+SRC_URI="https://www.freefilesync.org/download/FreeFileSync_${PV}_Source.zip"
+S=${WORKDIR}
 
 LICENSE="GPL-3"
-
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+
+RESTRICT="mirror"
 
 DEPEND="
 	app-arch/unzip
@@ -27,19 +24,16 @@ DEPEND="
 	net-misc/curl
 	net-libs/libssh2
 "
-
-RDEPEND=">=x11-libs/wxGTK-3.2[X]"
+RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/freefilesync-${PV}-adapt.patch
 )
 
-S=${WORKDIR}
-
 src_prepare(){
 	mkdir FreeFileSync/Build/Bin
 	find . -name '*.cpp' -o -name '*.h' |xargs sed -i 's/\r//'
-    setup-wxwidgets unicode
+	setup-wxwidgets unicode
 	default
 }
 
