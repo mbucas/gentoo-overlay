@@ -10,10 +10,10 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Python module that implements the Transmission bittorrent client RPC protocol"
 HOMEPAGE="https://bitbucket.org/blueluna/transmissionrpc"
-KEYWORDS="~amd64"
 
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="~amd64"
 
 DEPEND=">=dev-python/six-1.1.0[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
