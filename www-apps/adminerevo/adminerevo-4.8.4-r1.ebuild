@@ -15,8 +15,8 @@ IUSE="+mysql postgres sqlite vhosts"
 
 DEPEND=""
 RDEPEND="
-    virtual/httpd-php:8.2
-    dev-lang/php:8.2
+	virtual/httpd-php:8.2
+	dev-lang/php:8.2
 	mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) )
 	postgres? ( dev-lang/php[postgres] )
 	sqlite? ( dev-lang/php[sqlite] )
@@ -25,9 +25,9 @@ RDEPEND="
 S="${WORKDIR}/${PN}"
 
 src_unpack() {
-    mkdir -p "${S}" || die
-    # Source isn't compressed, just minified PHP
-    cp "${DISTDIR}/adminer-${PV}.php" "${S}/index.php" || die
+	mkdir -p "${S}" || die
+	# Source isn't compressed, just minified PHP
+	cp "${DISTDIR}/adminer-${PV}.php" "${S}/index.php" || die
 }
 
 src_install() {
@@ -35,7 +35,7 @@ src_install() {
 
 	insinto "${MY_HTDOCSDIR}"
 	doins index.php
-    newins "${FILESDIR}"/adminer.css adminer.css
+	newins "${FILESDIR}"/adminer.css adminer.css
 
 	webapp_src_install
 }
