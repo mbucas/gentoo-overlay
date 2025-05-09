@@ -11,4 +11,4 @@ RDEPEND=virtual/httpd-php:8.2 dev-lang/php:8.2 mysql? ( || ( dev-lang/php[mysql]
 SLOT=4.8.4-r1
 SRC_URI=https://github.com/adminerevo/adminerevo/releases/download/v4.8.4/adminer-4.8.4.php
 _eclasses_=webapp	5fa840db95fc7348dfd53b8526ed05f5
-_md5_=98fbf5b0df7a12d59f2935225fff0461
+_md5_=a58fcb2bd4267914710b56d4ced41977
