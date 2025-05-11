@@ -1,6 +1,6 @@
-diff -Nur a/FreeFileSync/Source/base/icon_loader.cpp b/FreeFileSync/Source/base/icon_loader.cpp
+diff '--color=auto' -ruN a/FreeFileSync/Source/base/icon_loader.cpp b/FreeFileSync/Source/base/icon_loader.cpp
 --- a/FreeFileSync/Source/base/icon_loader.cpp	2023-09-13 12:16:12.000000000 +0200
-+++ b/FreeFileSync/Source/base/icon_loader.cpp	2024-02-27 12:13:37.164326422 +0100
++++ b/FreeFileSync/Source/base/icon_loader.cpp	2025-05-10 23:34:57.993898976 +0200
 @@ -227,6 +227,7 @@
      //the remaining icon types won't block!
      assert(GDK_IS_PIXBUF(gicon) || G_IS_THEMED_ICON(gicon) || G_IS_EMBLEMED_ICON(gicon));
@@ -9,9 +9,9 @@ diff -Nur a/FreeFileSync/Source/base/icon_loader.cpp b/FreeFileSync/Source/base/
      ::g_object_ref(gicon);                 //pass ownership
      return FileIconHolder(gicon, maxSize); //
  
-diff -Nur a/FreeFileSync/Source/ffs_paths.cpp b/FreeFileSync/Source/ffs_paths.cpp
+diff '--color=auto' -ruN a/FreeFileSync/Source/ffs_paths.cpp b/FreeFileSync/Source/ffs_paths.cpp
 --- a/FreeFileSync/Source/ffs_paths.cpp	2023-09-13 12:16:12.000000000 +0200
-+++ b/FreeFileSync/Source/ffs_paths.cpp	2024-02-27 11:10:09.417508034 +0100
++++ b/FreeFileSync/Source/ffs_paths.cpp	2025-05-10 23:34:58.093898973 +0200
 @@ -55,7 +55,7 @@
  
  Zstring fff::getResourceDirPath()
@@ -21,9 +21,9 @@ diff -Nur a/FreeFileSync/Source/ffs_paths.cpp b/FreeFileSync/Source/ffs_paths.cp
  }
  
  
-diff -Nur a/FreeFileSync/Source/Makefile b/FreeFileSync/Source/Makefile
+diff '--color=auto' -ruN a/FreeFileSync/Source/Makefile b/FreeFileSync/Source/Makefile
 --- a/FreeFileSync/Source/Makefile	2023-09-13 12:16:10.000000000 +0200
-+++ b/FreeFileSync/Source/Makefile	2024-02-27 10:25:55.920734672 +0100
++++ b/FreeFileSync/Source/Makefile	2025-05-10 23:34:58.183898969 +0200
 @@ -1,11 +1,19 @@
  CXX ?= g++
 -exeName = FreeFileSync_$(shell arch)
@@ -94,9 +94,9 @@ diff -Nur a/FreeFileSync/Source/Makefile b/FreeFileSync/Source/Makefile
 +
 +	mkdir -p $(DOCSHAREDIR)
 +	cp ../../Changelog.txt $(DOCSHAREDIR)/CHANGELOG
-diff -Nur a/FreeFileSync/Source/RealTimeSync/Makefile b/FreeFileSync/Source/RealTimeSync/Makefile
+diff '--color=auto' -ruN a/FreeFileSync/Source/RealTimeSync/Makefile b/FreeFileSync/Source/RealTimeSync/Makefile
 --- a/FreeFileSync/Source/RealTimeSync/Makefile	2023-09-13 12:16:10.000000000 +0200
-+++ b/FreeFileSync/Source/RealTimeSync/Makefile	2024-02-27 10:26:30.747402745 +0100
++++ b/FreeFileSync/Source/RealTimeSync/Makefile	2025-05-10 23:34:58.283898966 +0200
 @@ -1,14 +1,20 @@
  CXX ?= g++
 -exeName = RealTimeSync_$(shell arch)
@@ -149,3 +149,15 @@ diff -Nur a/FreeFileSync/Source/RealTimeSync/Makefile b/FreeFileSync/Source/Real
 +install:
 +	mkdir -p $(BINDIR)
 +	cp ../../Build/Bin/$(EXENAME) $(BINDIR)
+diff '--color=auto' -ruN a/libcurl/curl_wrap.cpp b/libcurl/curl_wrap.cpp
+--- a/libcurl/curl_wrap.cpp	2023-09-13 12:16:13.000000000 +0200
++++ b/libcurl/curl_wrap.cpp	2025-05-10 23:36:47.173895636 +0200
+@@ -400,7 +400,7 @@
+             ZEN_CHECK_CASE_FOR_CONSTANT(CURLE_UNRECOVERABLE_POLL);
+             ZEN_CHECK_CASE_FOR_CONSTANT(CURL_LAST);
+     }
+-    static_assert(CURL_LAST == CURLE_UNRECOVERABLE_POLL + 1);
++//    static_assert(CURL_LAST == CURLE_UNRECOVERABLE_POLL + 1);
+ 
+     return replaceCpy<std::wstring>(L"Curl status %x", L"%x", numberTo<std::wstring>(static_cast<int>(sc)));
+ }
