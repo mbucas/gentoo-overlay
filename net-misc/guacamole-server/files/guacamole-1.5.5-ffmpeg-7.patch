@@ -1,0 +1,12 @@
+diff '--color=auto' -ruN a/src/guacenc/video.c b/src/guacenc/video.c
+--- a/src/guacenc/video.c	2024-03-13 23:26:33.000000000 +0100
++++ b/src/guacenc/video.c	2025-05-11 18:00:02.351496528 +0200
+@@ -500,7 +500,7 @@
+ 
+     /* Clean up encoding context */
+     if (video->context != NULL) {
+-        avcodec_close(video->context);
++        // avcodec_close(video->context);
+         avcodec_free_context(&(video->context));
+     }
+ 
