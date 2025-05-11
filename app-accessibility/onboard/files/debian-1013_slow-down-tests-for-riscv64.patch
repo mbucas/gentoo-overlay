@@ -1,0 +1,16 @@
+Description: Slow down tests for riscv64. Resolves test failures due to onboard not coming up fast enough.
+Author: Aurelien Jarno <aurel32@debian.org>
+
+Index: b/Onboard/test/test_migration.py
+===================================================================
+--- a/Onboard/test/test_migration.py
++++ b/Onboard/test/test_migration.py
+@@ -141,7 +141,7 @@
+             env["LANG"] = "en_US.UTF-8"
+ 
+             p = subprocess.Popen(["./onboard"], env=env)
+-            time.sleep(1)
++            time.sleep(6)
+             yield p
+ 
+         finally:

@@ -1,0 +1,13 @@
+diff '--color=auto' -ruN a/Onboard/osk/osk_module.h b/Onboard/osk/osk_module.h
+--- a/Onboard/osk/osk_module.h	2017-02-15 09:42:04.000000000 +0100
++++ b/Onboard/osk/osk_module.h	2025-05-11 00:14:32.987159727 +0200
+@@ -25,7 +25,8 @@
+ #include <Python.h>
+ #include <structmember.h>
+ 
+-typedef enum { false, true } bool;
++// typedef enum { false, true } bool;
++#include <stdbool.h>
+ 
+ /**
+  * Python2 to Python3 conversion

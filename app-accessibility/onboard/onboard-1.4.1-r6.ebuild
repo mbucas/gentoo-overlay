@@ -20,6 +20,7 @@ KEYWORDS="~amd64 ~x86"
 COMMON_DEPEND="app-text/hunspell:=
 	dev-libs/dbus-glib
 	dev-python/dbus-python[${PYTHON_USEDEP}]
+	dev-python/python-distutils-extra[${PYTHON_USEDEP}]
 	dev-python/pycairo[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	gnome-base/dconf
@@ -47,7 +48,28 @@ RESTRICT="mirror"
 # These are using a functionality of distutils-r1.eclass
 DOCS=( AUTHORS CHANGELOG HACKING NEWS README onboard-defaults.conf.example
 	onboard-default-settings.gschema.override.example )
-PATCHES=( "${FILESDIR}/${P}-remove-duplicated-docs.patch" )
+
+# Debian patches from Ubuntu onboard 1.4.1-10 source package under same license GPL-3+
+# See https://launchpad.net/ubuntu/+source/onboard/1.4.1-10
+PATCHES=(
+	"${FILESDIR}/debian-0001-Replace-invalid-UTF-8-characters-in-ACPI-events.patch"
+	"${FILESDIR}/debian-1001_desktop-file-fixes.patch"
+	"${FILESDIR}/debian-1002_build-against-Ayatana-AppIndicator.patch"
+	"${FILESDIR}/debian-1003_disable_onboard_on_gnome.patch"
+	"${FILESDIR}/debian-1004-fix-ftbfs-python3-12.patch"
+	"${FILESDIR}/debian-1005_fix-invalid-escape-sequences.patch"
+	"${FILESDIR}/debian-1006_fix-str-not-callable-in-LayoutLoaderSVG-py.patch"
+	"${FILESDIR}/debian-1007-fix-test-dependencies.patch"
+	"${FILESDIR}/debian-1008_enable-tests-during-build.patch"
+	"${FILESDIR}/debian-1010_arctica-greeter.patch"
+	"${FILESDIR}/debian-1011_python-distutils-byebye.patch"
+	"${FILESDIR}/debian-1012_thread-state.patch"
+	"${FILESDIR}/debian-1013_slow-down-tests-for-riscv64.patch"
+	"${FILESDIR}/debian-2001_drop-gui-test.patch"
+	"${FILESDIR}/debian-2002_drop-dbus-test.patch"
+	"${FILESDIR}/${P}-include-stdbool.patch"
+	"${FILESDIR}/${P}-remove-duplicated-docs.patch"
+)
 
 src_prepare() {
 	distutils-r1_src_prepare
