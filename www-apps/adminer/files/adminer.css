@@ -1,0 +1,889 @@
+/**
+* Adminer theme by Aleksey M. (alekseymvt@gmail.com)
+* @link https://github.com/alekseymvt/Adminer.theme
+* @link https://github.com/vrana/adminer/
+* @link https://www.adminer.org/
+* -----------
+* Based on work by:
+* FLAT UI Flavored Adminer Theme by M. Mahbubur Rahman (mahbub@mahbubblog.com)
+* designs/pappu687/adminer.css
+* -----------
+* Based on work by : Lukáš Brandejs
+* https://raw.github.com/vrana/adminer/master/designs/ng9/adminer.css
+*/
+
+/*! normalize.css v4.2.0 | MIT License | github.com/necolas/normalize.css */
+
+html {
+	font-family: sans-serif;
+	line-height: 1.15;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+	display: block;
+}
+
+body {
+	margin: 0;
+}
+
+h1 {
+	font-size: 2em;
+	margin: .67em 0;
+}
+
+hr {
+	box-sizing: content-box;
+	height: 1px;
+	border: 0;
+	background: gray;
+}
+
+a {
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
+	cursor: pointer;
+}
+
+a:active, a:hover {
+	outline-width: 0;
+}
+
+abbr[title] {
+	border-bottom: none;
+	text-decoration: underline dotted;
+}
+
+code, kbd, pre, samp {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+
+dfn {
+	font-style: italic;
+}
+
+mark {
+	background-color: #ff0;
+	color: #000;
+}
+
+small {
+	font-size: 80%;
+}
+
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -.25em;
+}
+
+sup {
+	top: -.5em;
+}
+
+audio,
+video {
+	display: inline-block;
+}
+
+audio:not([controls]) {
+	display: none;
+	height: 0;
+}
+
+img {
+	border-style: none;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	font: inherit;
+	margin: 0;
+}
+
+button,
+input {
+	overflow: visible;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+	-webkit-appearance: button;
+	display: inline-block;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-clear-button {
+	display: none;
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+	margin: 0 2px;
+	padding: .35em .625em .75em;
+}
+
+legend {
+	color: inherit;
+	border: 0;
+	padding: 0;
+	max-width: 100%;
+}
+
+textarea {
+	overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+	height: auto;
+}
+
+[type="search"] {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+details,
+menu {
+	display: block;
+}
+
+summary {
+	display: list-item;
+}
+
+[hidden], template {
+	display: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td, th {
+	padding: 2px;
+}
+
+/** -------------- Adminer.css ---------------*/
+
+html {
+	font-size: 14px
+}
+
+*, :after, :before {
+	box-sizing: border-box
+}
+
+body, html {
+	margin: 0;
+	padding: 0
+}
+
+h1, h2, h3 {
+	margin: 0
+}
+
+body {
+	background: #eef0f0;
+	font: 14px/1.36 Verdana, Arial, Helvetica, sans-serif;
+	font-size: inherit;
+}
+
+a, a:visited {
+	color: #2980b9;
+	text-decoration: none;
+	padding: 3px 1px
+}
+
+h1 {
+	font-size: 1.5em;
+	font-weight: normal;
+	background: #fff;
+	color: #1e5eb6;
+	border-bottom: 1px solid #55708b;
+	padding: 20px
+}
+
+.error, .message, h2, h3, th a {
+	font-weight: bold
+}
+
+h2, h3 {
+	font-size: 1.7em;
+	background: 0 0;
+	color: #34495e;
+	border-bottom: 1px solid #f4f4f4;
+	padding: 10px 0
+}
+
+fieldset {
+	padding: 5px;
+	border: 1px solid #dedede
+}
+
+input, select, textarea {
+	border: 1px solid #dedede;
+	display: inline-block;
+	vertical-align: middle;
+	padding: 5px
+}
+
+input[type=submit] {
+	background: #27ae60;
+	cursor: pointer
+}
+
+input[type=submit]:hover {
+	background: #2c3e50
+}
+
+input[type=checkbox] {
+	margin-right: 5px
+}
+
+input[type=image] {
+	border: 1px solid #d0cdc4
+}
+
+input[type=checkbox], input[type=radio] {
+	border: 1px solid #e5e5e5;
+	padding: 2px 5px
+}
+
+input[name*=length], input[name=limit] {
+	width: 5em;
+}
+
+input[name=text_length] {
+	width: 5em
+}
+
+code {
+	background: #f0ffe1;
+	border: 1px dashed #d5f1b9;
+	padding: 2px 4px;
+	font-family: Monaco, "Courier New", monospace;
+}
+
+code a:hover {
+	background: 0 0
+}
+
+table {
+	margin: 10px 0;
+	position: relative;
+	box-shadow: 0 0 10px rgba(119, 119, 119, .2)
+}
+
+td, th {
+	border: 1px solid #e9e9e9;
+	padding: 3px 6px;
+}
+
+th {
+	background: #fff
+}
+
+th a {
+	padding-bottom: 0;
+	text-shadow: 1px 1px 1px #fff
+}
+
+tbody tr:hover td, tbody tr:hover th {
+	background: #edf4ff
+}
+
+thead td, thead th {
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+	white-space: nowrap;
+	border-right: 1px solid #fff;
+	background: #31587d;
+	color: #fff;
+	padding: 7px 2px;
+}
+
+thead td acronym, thead td sup, thead th acronym, thead th sup {
+	color: #cdf
+}
+
+tr.odd td {
+	background: #fcfaf5
+}
+
+.nowrap td, .nowrap th, td.nowrap, p.nowrap {
+	white-space: nowrap;
+}
+
+.hidden {
+	display: none;
+}
+
+.error, .message {
+	padding: 0;
+	background: 0 0;
+}
+
+.error {
+	color: #c00;
+}
+
+.message {
+	color: #090;
+}
+
+.js .hidden {
+	display: contents;
+}
+
+.js input.hidden, .js td.hidden {
+	display: none
+}
+
+.logout {
+	top: 28px;
+}
+
+.js .column {
+	background: #ecf0f1
+}
+
+a:hover {
+	text-decoration: underline
+}
+
+input[name=logout] {
+	color: #fce2e2;
+	background: #d73e3e
+}
+
+input[name=drop] {
+	background-color: #c0392b
+}
+
+input[name=logout]:hover {
+	background: #ea0202
+}
+
+input[type=submit] {
+	border-radius: 2px;
+	border: 0;
+	padding: 5px 15px;
+	text-decoration: none;
+	background-color: #65adc3;
+	color: #fff;
+	text-shadow: 0 1px 0 #287ace;
+	box-shadow: inset 0 0 0 0 #cae3fc
+}
+
+input[type=submit]:hover {
+	background-color: #34495e;
+	text-shadow: 0 1px 0 #000
+}
+
+input[type=submit]:active {
+	position: relative;
+	top: 1px
+}
+
+table tbody input[name*=check] {
+	display: block;
+	float: left
+}
+
+table thead a[href*="&modify"] {
+	background: url("img/edit-record.png") right bottom no-repeat;
+	padding-right: 18px
+}
+
+table thead input ~ a[href*="&modify"] {
+	width: 0;
+	display: inline-block;
+	height: 16px;
+	overflow: hidden;
+	text-decoration: none;
+	padding: 0 0 0 18px;
+	background-position: 2px bottom
+}
+
+table tbody a[href*="&edit="][href*="&where"] {
+	background: url("img/edit-record.png") right bottom no-repeat;
+	padding-right: 18px
+}
+
+table tbody input ~ a[href*="&edit="][href*="&where"] {
+	width: 0;
+	display: inline-block;
+	height: 16px;
+	overflow: hidden;
+	text-decoration: none;
+	padding: 0 0 0 18px;
+	background-position: 2px bottom
+}
+
+#schema .table {
+	padding: 5px;
+	background: #fcfaf5;
+	border: 1px solid #d0cdc4
+}
+
+#schema .table b {
+	color: #006aeb;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#schema .table b:hover {
+	color: #fff
+}
+
+#dbs input[name=db] {
+	background: inherit;
+	color: #fff;
+	padding: 3px;
+	width: 10rem;
+}
+
+#dbs input[name=db] + input {
+	padding: 5px;
+}
+
+#dbs span {
+	color: #fff
+}
+
+#breadcrumb, #breadcrumb a {
+	font-weight: bold;
+	color: #ecf0f1
+}
+
+#breadcrumb, #lang {
+	z-index: 2;
+	padding: 5px
+}
+
+#lang {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: auto;
+	line-height: 1;
+	left: initial;
+	font-size: 11px
+}
+
+#lang select {
+	font-size: inherit
+}
+
+#breadcrumb {
+	left: 21.5rem;
+	background: #31587d;
+	right: 0;
+	height: auto;
+	position: fixed;
+	top: 0;
+}
+
+#logins, #tables {
+	padding: 0 0 0 5px;
+	margin: 0;
+	list-style: none;
+}
+
+#menu {
+	background: #213d58;
+	position: fixed;
+	top: 0;
+	color: #fff;
+	padding: 0;
+	bottom: 0;
+	overflow: auto;
+	left: 0;
+	width: 20rem;
+	margin: 0;
+}
+
+#menu h1 {
+	padding: 0 10px;
+	background: 0 0
+}
+
+#menu .links {
+	padding: 5px;
+	line-height: 1;
+	text-align: center;
+	font-size: 11px;
+}
+
+#menu a, #logins a, #tables .select {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px
+}
+
+#menu select {
+	background: inherit;
+	color: #fff;
+	padding: 3px;
+	width: 15rem;
+}
+
+#menu select option {
+	background: #fff;
+	color: #000;
+}
+
+#menu p {
+	border-bottom: 1px solid #55708b;
+	padding: .8em .5em
+}
+
+#menu a {
+	color: #fff;
+}
+
+#logins a, #tables a {
+	background: 0 0
+}
+
+#logout {
+	color: #fff;
+	text-decoration: none
+}
+
+#logout:hover {
+	color: red
+}
+
+#version, .version {
+	font-size: 50%
+}
+
+#h1:hover {
+	color: #fff
+}
+
+#tables .select {
+	background: url("img/show-records.png") left center no-repeat;
+	height: 15px;
+	padding: 0;
+	overflow: hidden;
+	width: 15px;
+	text-decoration: none;
+	line-height: 1;
+	color: transparent;
+	margin-right: 0;
+}
+
+/* editor */
+#tables .select[title] {
+	height: auto;
+	padding: 3px 20px;
+	overflow: visible;
+	width: auto;
+	text-decoration: none;
+	line-height: inherit;
+	color: white;
+}
+
+#tables .structure {
+	min-width: calc(100% - 5px - 25px);
+	padding-left: 5px;
+}
+
+#tables .structure.active, #tables .select.active + .structure {
+	background-color: #1a5fa5;
+}
+
+#menu a[href$="sql="] {
+	background: url("img/new-sql.png") left center no-repeat;
+	display: inline-block;
+	color: transparent;
+	overflow: hidden;
+	width: 18px;
+}
+
+#menu a[href$="import="] {
+	background: url("img/show-records.png") left center no-repeat;
+	display: inline-block;
+	padding-left: 20px;
+	vertical-align: middle;
+}
+
+#menu a[href*="dump="] {
+	background: url("img/export.png") left center no-repeat;
+	display: inline-block;
+	padding-left: 20px;
+	vertical-align: middle;
+}
+
+#menu a[href$="&create="] {
+	background: url("img/new-table.png") left center no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	padding-left: 20px;
+}
+
+#content {
+	margin: 0 0 0 20rem;
+	padding: 35px 5px 20px .5rem;
+}
+
+#content table thead a.text:hover {
+	text-decoration: none
+}
+
+#content table thead a, #content table thead span {
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+	background: 0 0;
+	white-space: nowrap;
+	position: static
+}
+
+#content table thead a:hover {
+	background: 0 0;
+	text-decoration: underline;
+	color: #000
+}
+
+#content tbody tr.checked td, tr.checked.odd td {
+	background: #fbe2e2;
+	color: red
+}
+
+#content p a[href*="&select="] {
+	background: url("img/show-records.png") left center no-repeat;
+	padding-left: 22px
+}
+
+#content p a[href*="&page="] {
+	background-image: none;
+	padding-left: 0
+}
+
+#content p a[href$="&database="] {
+	background: url("img/new-db.png") 2px bottom no-repeat;
+	padding-left: 22px
+}
+
+#content p a[href*="&edit="] {
+	background: url("img/new-record.png") left center no-repeat;
+	padding-left: 22px
+}
+
+#content p a[href*="&table="].jush-custom {
+	font-weight: bold
+}
+
+#content p.links a[href*="&table="] {
+	background: url("img/show-table.png") left center no-repeat;
+	padding-left: 22px
+}
+
+#content p.links a[href*="&create="],
+#content p.links a[href*="&view="] {
+	background: url("img/new-table.png") left center no-repeat;
+	padding-left: 22px;
+}
+
+#content a[href*="&db="][href*="&database="] {
+	background: url("img/edit-db.png") 2px bottom no-repeat;
+	padding-left: 22px
+}
+
+#content p a[href*="&schema="] {
+	background: url("img/show-schema.png") 2px bottom no-repeat;
+	padding-left: 22px
+}
+
+#content p a[href*="&sql="] {
+	background: url("img/edit-sql.png") 2px bottom no-repeat;
+	padding-left: 24px
+}
+
+#table input {
+	padding: 3px 5px;
+}
+
+#edit-fields tbody th, #edit-fields tbody td {
+	border: 0;
+	border-right: 1px solid #213d58;
+	padding: 1px;
+	vertical-align: top;
+	text-align: center;
+}
+
+#edit-fields tbody th:last-child, #edit-fields tbody td:last-child {
+	border-right: 0;
+}
+
+#edit-fields .icon {
+	padding: 2px;
+}
+
+#partition-table.hidden {
+	display: none;
+}
+
+#partition-table td {
+	padding: 1px;
+}
+
+.footer {
+	border-top: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
+	border-image: none;
+	margin: .5rem 0;
+	margin-right: initial;
+}
+
+.footer > div {
+	padding: 5px;
+}
+
+/** -------------- Personal changes ---------------*/
+
+#help {
+	display: none;
+}
+
+#menu h1 {
+	height: 60px;
+}
+
+#menu table {
+	box-shadow: none;
+}
+
+#menu select {
+	width: 12rem;
+}
+
+#menu .links {
+	text-align: left;
+	font-size: 14px;
+}
+#menu a[href$="sql="] {
+	display: block;
+	width: auto;
+	color: #fff;
+	padding-left: 20px;
+}
+
+#menu a[href$="import="] {
+	display: block;
+}
+
+#menu a[href*="dump="] {
+	display: block;
+}
+
+#menu a[href$="&create="] {
+	display: block;
+}
+
+#menu #tables li a.select {
+	background: url("img/show-records.png") left center no-repeat;
+	background-size: 16px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 14px;
+}
+
+#menu tbody tr:hover td, tbody tr:hover th {
+	background: none;
+}
+
+#lang {
+	color: #ecf0f1;
+	top: 30px;
+}
+
+#lang select {
+	background: inherit;
+	color: inherit;
+}
+
+#content div {
+	box-shadow: none;
+}
+
+.logout {
+	z-index: 2;
+	top: 2px;
+	right: 7px;
+	margin: 0;
+	position: fixed;
+}
