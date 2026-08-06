@@ -10,4 +10,4 @@ RDEPEND=x11-libs/gtk+:3= x11-libs/libnotify dev-libs/nss x11-libs/libXScrnSaver 
 SLOT=0
 SRC_URI=https://download.eclipse.org/theia/ide/1.73.100/linux/TheiaIDE.deb -> TheiaIDE-1.73.100.deb
 _eclasses_=eapi9-pipestatus	d2c134036ac31c3085aebc9147f572bd	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	unpacker	a89c769f7dcf68bd2a6d23da9ede2ad2	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575
-_md5_=a37cfac5cfea96d069a16c6e6787610b
+_md5_=02f391758fffda63f917cb3714a748a3
