@@ -19,6 +19,7 @@ RDEPEND="
 	x11-libs/gtk+:3=
 	x11-libs/libnotify
 	dev-libs/nss
+    x11-libs/libXScrnSaver
 	x11-libs/libXtst
 	x11-misc/xdg-utils
 	app-accessibility/at-spi2-core
@@ -33,4 +34,5 @@ src_install() {
 	mv "${D}/usr/share/doc/theia-ide-electron-app" "${D}/usr/share/doc/${PF}" || die "Rename failed"
 	# Application symbolic link
 	dosym "../../opt/TheiaIDE/theia-ide-electron-app" "/usr/bin/theia-ide-electron-app"
+	dosym "../../opt/TheiaIDE/theia-ide-electron-app.bin" "/usr/bin/theia-ide-electron-app.bin"
 }
