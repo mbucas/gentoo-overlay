@@ -7,10 +7,7 @@ inherit webapp
 
 DESCRIPTION="Adminer - Database management in a single PHP file"
 HOMEPAGE="https://www.adminer.org/"
-SRC_URI="
-https://github.com/vrana/adminer/releases/download/v${PV}/adminer-${PV}.php
-https://github.com/vrana/adminer/releases/download/v${PV}/editor-${PV}.php
-"
+SRC_URI="https://github.com/vrana/adminer/releases/download/v${PV}/adminer-${PV}.php"
 S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-2 Apache-1.0"
@@ -31,7 +28,6 @@ src_unpack() {
 	mkdir -p "${S}" || die
 	# Source isn't compressed, just minified PHP
 	cp "${DISTDIR}/adminer-${PV}.php" "${S}/index.php" || die
-	cp "${DISTDIR}/editor-${PV}.php" "${S}/editor.php" || die
 }
 
 src_install() {
@@ -39,7 +35,6 @@ src_install() {
 
 	insinto "${MY_HTDOCSDIR}"
 	doins index.php
-	doins editor.php
 	newins "${FILESDIR}"/adminer.css adminer.css
 
 	insinto "${MY_HTDOCSDIR}/img"
