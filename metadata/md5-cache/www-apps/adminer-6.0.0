@@ -8,7 +8,7 @@ IUSE=+mysql postgres sqlite vhosts vhosts
 KEYWORDS=~amd64
 LICENSE=GPL-2 Apache-1.0
 RDEPEND=virtual/httpd-php:* >=dev-lang/php-8.2 mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) ) postgres? ( dev-lang/php[postgres] ) sqlite? ( dev-lang/php[sqlite] ) app-admin/webapp-config
-SLOT=5.5.1
-SRC_URI=https://github.com/vrana/adminer/releases/download/v5.5.1/adminer-5.5.1.php
+SLOT=6.0.0
+SRC_URI=https://github.com/vrana/adminer/releases/download/v6.0.0/adminer-6.0.0.php
 _eclasses_=webapp	5fa840db95fc7348dfd53b8526ed05f5
 _md5_=a464edca305c30cb2477f4e45f42c7e1
