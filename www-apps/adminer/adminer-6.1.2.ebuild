@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,7 +18,7 @@ IUSE="+mysql postgres sqlite vhosts"
 
 RDEPEND="
 	virtual/httpd-php:*
-	>=dev-lang/php-8.2
+	>=dev-lang/php-8.3
 	mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) )
 	postgres? ( dev-lang/php[postgres] )
 	sqlite? ( dev-lang/php[sqlite] )
