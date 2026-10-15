@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst prerm setup
+DEPEND=app-admin/webapp-config
+DESCRIPTION=Atheos Cloud Based IDE
+EAPI=8
+HOMEPAGE=https://www.atheos.io/
+INHERIT=webapp
+IUSE=vhosts
+KEYWORDS=~amd64
+LICENSE=MIT
+RDEPEND=virtual/httpd-php:* >=dev-lang/php-8.3 app-admin/webapp-config
+SLOT=6.1.1_p20260720
+SRC_URI=https://github.com/Atheos/Atheos/archive/f90cd1806dbe0e25673a77e27390e8b1a240c3f6.tar.gz -> atheos-6.1.1_p20260720.tar.gz
+_eclasses_=webapp	5fa840db95fc7348dfd53b8526ed05f5
+_md5_=f94c4ec0ce31cae6aca765f4d3a03203

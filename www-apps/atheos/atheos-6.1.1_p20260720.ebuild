@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,16 +7,18 @@ inherit webapp
 
 DESCRIPTION="Atheos Cloud Based IDE"
 HOMEPAGE="https://www.atheos.io/"
-SRC_URI="https://github.com/Atheos/Atheos/archive/refs/tags/v${PV//\./}.tar.gz -> ${PN}.${PV}.tar.gz"
-S="${WORKDIR}/Atheos-${PV//\./}"
+
+GIT_HASH="f90cd1806dbe0e25673a77e27390e8b1a240c3f6"
+SRC_URI="https://github.com/Atheos/Atheos/archive/${GIT_HASH}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/Atheos-${GIT_HASH}"
 
 LICENSE="MIT"
 
 KEYWORDS="~amd64"
 
 RDEPEND="
-	virtual/httpd-php:8.2
-	dev-lang/php:8.2
+	virtual/httpd-php:*
+	>=dev-lang/php-8.3
 "
 
 src_install() {
