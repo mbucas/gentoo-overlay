@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,21 +7,23 @@ inherit webapp
 
 DESCRIPTION="Single-file PHP file manager"
 HOMEPAGE="https://tinyfilemanager.github.io/"
-SRC_URI="https://github.com/prasathmani/tinyfilemanager/archive/refs/tags/${PV}.tar.gz -> ${PN}.${PV}.tar.gz"
-S="${WORKDIR}/${P}"
+
+GIT_HASH="41491439a6b243c55502581e53fad20bc4c6e777"
+SRC_URI="https://github.com/prasathmani/tinyfilemanager/archive/${GIT_HASH}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}-${GIT_HASH}"
 
 LICENSE="GPL-3"
 
 KEYWORDS="~amd64"
 
 RDEPEND="
-	virtual/httpd-php:8.2
-	dev-lang/php:8.2
+	virtual/httpd-php:*
+	>=dev-lang/php-8.3
 	dev-lang/php[fileinfo,iconv,zip]
 "
 
 PATCHES=(
-	"${FILESDIR}"/tinyfilemanager-${PV}-personal-changes.patch
+	"${FILESDIR}"/tinyfilemanager-2.6-personal-changes.patch
 )
 
 src_install() {

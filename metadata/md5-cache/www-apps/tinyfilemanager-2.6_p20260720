@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst prerm setup
+DEPEND=app-admin/webapp-config
+DESCRIPTION=Single-file PHP file manager
+EAPI=8
+HOMEPAGE=https://tinyfilemanager.github.io/
+INHERIT=webapp
+IUSE=vhosts
+KEYWORDS=~amd64
+LICENSE=GPL-3
+RDEPEND=virtual/httpd-php:* >=dev-lang/php-8.3 dev-lang/php[fileinfo,iconv,zip] app-admin/webapp-config
+SLOT=2.6_p20260720
+SRC_URI=https://github.com/prasathmani/tinyfilemanager/archive/41491439a6b243c55502581e53fad20bc4c6e777.tar.gz -> tinyfilemanager-2.6_p20260720.tar.gz
+_eclasses_=webapp	5fa840db95fc7348dfd53b8526ed05f5
+_md5_=08659a204e6900f809da777f27cd98fd
